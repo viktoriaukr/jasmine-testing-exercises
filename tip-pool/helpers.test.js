@@ -27,7 +27,22 @@ describe("Helpers tests", function () {
     const tipAmt = 350;
     expect(Math.round(100 / (billAmt / tipAmt))).toEqual(12);
   });
-  
+
+  it("should create a table row element that appends a newly created td element from the value", function () {
+    let tr = document.createElement("tr");
+
+    appendTd(tr, "new table element");
+
+    expect(tr.innerText).toEqual("new table element");
+  });
+
+  it("should create delete button", function () {
+    let tr = document.createElement("tr");
+    appendDeleteBtn(tr);
+
+    expect(tr.firstChild.innerText).toEqual("X");
+  });
+
   afterEach(function () {
     billAmtInput.value = "";
     tipAmtInput.value = "";
@@ -40,3 +55,4 @@ describe("Helpers tests", function () {
     paymentId = 0;
   });
 });
+
