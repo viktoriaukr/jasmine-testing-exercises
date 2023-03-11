@@ -27,13 +27,23 @@ function appendTd(tr, value) {
 function appendDeleteBtn(tr) {
   let newTd = document.createElement("td");
   newTd.innerText = "X";
-  newTd.addEventListener("click", function (e) {
-    e.target.closest("tr").remove();
-  });
+  newTd.addEventListener("click", removeRow);
 
   tr.append(newTd);
 }
 
-// function removeRow(e) {
-//   e.target.closest("tr").remove();
-// }
+function removeRow(e, type) {
+  let newTr = e.target;
+  let paymentId = newTr.id;
+  let serverId = newTr.id;
+
+  if (type === "server") {
+    delete allServers["server" + serverId];
+  } else if (type === "payment") {
+    delete allPayments["payment" + paymentId];
+  }
+  newTr.remove();
+
+  updateServerTable();
+  updateSummary();
+}
