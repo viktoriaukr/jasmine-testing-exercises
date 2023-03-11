@@ -32,17 +32,15 @@ function appendDeleteBtn(tr) {
   tr.append(newTd);
 }
 
-function removeRow(e, type) {
-  let newTr = e.target;
+function removeRow(e) {
+  let newTr = e.target.closest("tr");
   let paymentId = newTr.id;
   let serverId = newTr.id;
 
-  if (type === "server") {
-    delete allServers["server" + serverId];
-  } else if (type === "payment") {
-    delete allPayments["payment" + paymentId];
-  }
-  newTr.remove();
+  delete allServers[serverId];
+
+  delete allPayments[paymentId];
+  newTr.parentNode.removeChild(newTr);
 
   updateServerTable();
   updateSummary();
